@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Nutrition Compare";
+}
+
+<div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <p>
+        Nutrition Compare is an app that allows you to compare the nutritional information of two foods in an easily understandable manner.
+    </p>
+    <strong>Note!</strong>
+    <p>
+        The API to get food data is limited to 5000 requests per day. If it's not working, please come back tomorrow. Thanks for visiting! 
+    </p>
+    <p>
+        Also, be sure to visit <a href="http://www.ianmburns.com">ianmburns.com</a> !
+    </p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                <input id="selFoodA" data-ko="A" type="hidden" class="fullWidth" />
+            </th>
+            <th>Compared To
+            </th>
+            <th>
+                <input id="selFoodB" data-ko="B" type="hidden" class="fullWidth" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Serving Size</td>
+            <td data-bind="if: FoodA.servings().length > 0">
+                <select class="fullWidth" data-bind="options: FoodA.servings, value: FoodASelectedServing, optionsText: 'serving_description'"></select>
+            </td>
+            <td></td>
+            <td data-bind="if: FoodB.servings().length > 0">
+                <select class="fullWidth" data-bind="options: FoodB.servings, value: FoodBSelectedServing, optionsText: 'serving_description'"></select>
+            </td>
+        </tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('calories') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('fat') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('saturated_fat') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('polyunsaturated_fat') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('monounsaturated_fat') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('cholesterol') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('potassium') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('sodium') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('carbohydrate') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('fiber') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('sugar') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('protein') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('vitamin_a') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('vitamin_c') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('calcium') }"></tr>
+        <tr data-bind="template: { name: 'compare-template', data: ValueCompare('iron') }"></tr>
+    </tbody>
+</table>
+
+
+@section styles
+{
+    <link href="~/Content/css/select2.css" rel="stylesheet" />
+    <link href="~/Content/NutritionCompare.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/select2.js" type="text/javascript"></script>
+
+    <script type="text/html" id="compare-template">
+        <td>
+            <span data-bind="text: nutrient.toRegularString()" />
+        </td>
+        <td>
+            <span data-bind="text: FoodAValue" />
+        </td>
+        <td data-bind="css: compareClass">
+            <span data-bind="text: compareValue" />
+        </td>
+        <td>
+            <span data-bind="text: FoodBValue" />
+        </td>
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/nutrition-compare.js"></script>
+}

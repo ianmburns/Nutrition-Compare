@@ -1,0 +1,21 @@
+﻿.table
+{
+	width: 800px;
+	margin: 0 auto;
+		text-transform:capitalize;
+}
+
+th, td
+{
+	width: 200px;
+}
+
+	th:not(:first-child), td:not(:first-child)
+	{
+		text-align: center;
+	}
+
+
+.fullWidth {
+	width: 100%;
+}
